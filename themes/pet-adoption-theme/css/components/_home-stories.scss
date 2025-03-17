@@ -1,0 +1,96 @@
+.home-stories {
+  padding: $section-padding 0;
+  position: relative;
+
+  h2 {
+    margin-bottom: calc($heading-margin - 1.5rem);
+  }
+
+  .home-story {
+    display: flex;
+    justify-content: center;
+  }
+
+  .home-story__content {
+    display: none;
+    animation-name: fade-stories;
+    animation-duration: 2.5s;
+    
+    .home-story__img {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      top: 1.5rem;
+
+      img {
+        width: max(18.5%, 250px);
+        aspect-ratio: 1 / 1;
+        border-radius: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    .home-story__text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 0;
+      margin: 0 12.5%;
+      min-height: 176px;
+      background-color: $white-color;
+      border-radius: $base-border-radius;
+      
+      strong {
+        font-size: $font-size-sm;
+      }
+
+      div {
+        margin: $base-margin 0;
+
+        img {
+          width: 12rem;
+        }
+      }
+
+      p {
+        width: 90%;
+        padding: 0 $base-padding;
+        line-height: $base-line-height;
+      }
+    }
+  }
+
+  @keyframes fade-stories {
+    from {opacity: 0.25}
+    to {opacity: 1}
+  }
+
+  .home-stories__prev, .home-stories__next {
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: $base-padding;
+    margin: 0 5%;
+    font-weight: bold;
+    font-size: $font-size-md;
+    transition: 0.6s ease;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .home-stories__next {
+    right: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .home-story__content {
+      .home-story__text {
+        margin: 0 calc(2.5% + 15px + 2.5%);
+      }
+    }
+    .home-stories__prev, .home-stories__next {
+      margin: 0 2.5%;
+      padding: 0;
+    }
+  }
+}

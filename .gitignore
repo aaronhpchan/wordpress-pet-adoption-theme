@@ -1,0 +1,12 @@
+ai1wm-backups
+plugins
+upgrade
+uploads
+node_modules
+/index.php
+/themes/index.php
+/themes/twentytwentyfive
+/themes/pet-adoption-theme/package-lock.json
+/themes/pet-adoption-theme/images
+/themes/pet-adoption-theme/screenshot.PNG
+/plugins/index.php

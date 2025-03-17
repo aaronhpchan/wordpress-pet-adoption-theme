@@ -1,0 +1,28 @@
+/* 
+  Theme Name: Pet Adoption
+  Author: Aaron Chan
+  Version: 1.0
+*/
+
+// variables & functions
+@import 'css/variables';
+
+// base & layout
+@import 'css/base';
+
+// components (header, footer etc.)
+@import 'css/components/header';
+@import 'css/components/footer';
+@import 'css/components/search-overlay';
+@import 'css/components/nav-overlay';
+@import 'css/components/home-banner';
+@import 'css/components/home-links';
+@import 'css/components/home-posts';
+@import 'css/components/home-stories';
+@import 'css/components/home';
+@import 'css/components/pet-cards';
+@import 'css/components/pet';
+@import 'css/components/blog';
+@import 'css/components/volunteer';
+@import 'css/components/post';
+@import 'css/components/page';

@@ -1,0 +1,107 @@
+.post {
+  padding: $section-padding-sm 7.5% $section-padding;
+  text-align: center;
+
+  h5 {
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    margin: $base-margin 0;
+    font-size: $font-size-xs;
+    font-weight: 700;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    background-image: url('~../../images/text_decoration_pink.svg');
+    background-position: 50% 102.5%;
+    background-size: 180px;
+    background-repeat: repeat-x;
+  }
+
+  h1 {
+    font-size: $font-size-xl;
+    line-height: 3.75rem;
+    font-weight: 400;
+  }
+
+  &-category {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 0.95rem 0.95rem;
+    margin-top: $base-margin;
+    font-size: 0.65rem;
+    line-height: 0.8rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    background-color: $white-color;
+    align-self: center;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    margin: $base-margin 7.5% 0;
+    text-align: initial;
+
+    &__img {
+      margin: $base-margin 0 $section-padding-sm;
+      overflow: hidden; 
+  
+      img {
+        width: 100%;
+        border-radius: $border-radius-sm;
+      }
+
+      p {
+        font-size: $font-size-xs;
+        text-align: right;
+      }
+    }
+
+    p, li {
+      line-height: $base-line-height;
+    }
+
+    li:not(:last-child) {
+      margin-bottom: 0.25rem;
+    }
+
+    p:not(:last-child), ol:not(:last-child), ul:not(:last-child) {
+      margin-bottom: $base-margin;
+    }
+
+    h2 {
+      margin: $margin-sm 0;
+      text-align: left;
+    }
+
+    h2+p {
+      margin-top: $base-margin;
+    }
+    
+    h3, h4, h5, h6 {
+      margin: $margin-sm 0 $base-margin;
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    padding: $section-padding-sm $padding-sm $section-padding;
+
+    &-content {
+      margin: $base-margin $margin-sm 0;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: $font-size-lg;
+      line-height: 2.75rem;
+    }
+
+    h2 {
+      font-size: $font-size-md;
+    }
+
+    &-content {
+      margin: $base-margin 0 0;
+    }
+  }
+}

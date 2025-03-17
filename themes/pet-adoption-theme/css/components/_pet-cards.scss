@@ -1,0 +1,143 @@
+.pet-cards {
+  display: flex;
+
+  .pet-card {
+    display: flex;
+    position: relative;
+    width: calc(100% / 3);
+    min-height: 45vh;
+
+    a {
+      display: flex;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+      width: 50%;
+
+      * {
+        z-index: 1;
+      }
+
+      img {
+        width: 38px;
+      }
+
+      &-imghover {
+        animation-name: petCardIcon;
+        animation-duration: 1.25s;
+
+        @keyframes petCardIcon {
+          0% {
+            transform: rotate(0deg);
+          }
+          50% {
+            transform: rotate(15deg);
+          }
+          100% {
+            transform: rotate(0deg);
+          }
+        }
+      }
+
+      p:nth-of-type(1) {
+        font-size: $font-size-md;
+      }
+
+      div {
+        border: 2px solid $white-color;
+        border-radius: 20px;
+        padding: 0.95em 0.95rem;
+        font-size: 0.65rem;
+        line-height: 0.8rem;
+        letter-spacing: 0.15rem;
+        text-transform: uppercase;
+      }
+    }
+
+    &__bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      
+      &-hover {
+        animation-name: petCardBg;
+        animation-duration: 1.25s;
+        animation-fill-mode: forwards;
+
+        @keyframes petCardBg {
+          from {
+            background-image: none;
+            background-size: 150px;
+            background-position: 50% 50%;
+            opacity: 0;
+          }
+          to {
+            background-image: url('~../../images/background_pattern_footer.png');
+            background-size: 150px;
+            background-position: 50% 50%;
+            opacity: 0.325;
+          }
+        }
+      }
+    }
+
+    &__img {
+      display: inline-block; 
+      overflow: hidden;
+      width: 50%;
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        overflow-clip-margin: content-box;
+        overflow: clip;
+      }
+
+      &-hover {
+        animation-name: petCardImg;
+        animation-duration: 1.25s;
+        animation-fill-mode: forwards;
+
+        @keyframes petCardImg {
+          from {
+            transform: scale(1.0);
+          }
+          to {
+            transform: scale(1.075);
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    display: inline-flex;
+    flex-direction: column;
+    width: 50%;
+
+    .pet-card {
+      width: 100%;
+      min-height: 340px;
+      max-height: 340px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+  }
+}

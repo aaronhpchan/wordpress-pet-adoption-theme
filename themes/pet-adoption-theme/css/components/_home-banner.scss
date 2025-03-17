@@ -1,0 +1,120 @@
+.home-banner {
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $section-padding-sm 0 $section-padding;
+  
+    h1 {
+      text-align: center;
+      font-size: $font-size-xl;
+      line-height: 3.75rem;
+      font-weight: 400;
+      padding: $base-padding 0;
+  
+      span {
+        background-image: url('~../../images/text_decoration_pink.svg');
+        background-position: 50% 102.5%;
+        background-size: 300px;
+        background-repeat: repeat-x;
+      }
+    }
+  
+    h6 {
+      font-size: 0.75rem;
+      line-height: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      text-align: center;
+      border-radius: 20px;
+      background-color: #fff;
+      padding: $base-padding;
+    }
+  }
+
+  &__bg {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: calc((18vw / 4) * 5);
+    background-color: $banner-color;
+
+    &-img {
+      position: relative;
+      bottom: 10%;
+      width: 18vw;
+      margin: 0 $margin-sm;
+      z-index: 1;
+
+      &:nth-of-type(1) {
+        transform: rotateZ(-6.5deg);
+      }
+
+      &:nth-of-type(3) {
+        transform: rotateZ(6.5deg);
+      }
+      
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: $border-radius-sm;
+      }
+    }
+
+    &-pattern {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('~../../images/background_pattern.png');
+      background-size: 200px;
+      background-position: 50% 50%;
+      opacity: 0.3;
+    }
+  } 
+
+  @media screen and (max-width: 768px) {
+    &__heading {
+      h1 {
+        font-size: $font-size-lg;
+        line-height: 2.75rem;
+      }
+    }
+
+    &__bg {
+      height: 225px;
+
+      &-img {
+        width: 139px;
+        height: 173px;      
+        
+        &:nth-of-type(odd) {
+          bottom: 0;
+          top: 10%;
+          margin: 0;
+        }
+
+        &:nth-of-type(2) {
+          margin: 0 $base-margin;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    &__heading {
+      padding-left: $padding-sm;
+      padding-right: $padding-sm;
+      
+      h1 {
+        br {
+          display: none;
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,157 @@
+.footer {
+  position: relative;
+  background-color: #3d153d;
+  color: $white-color;
+  font-size: $base-font-size;
+  line-height: 1.25rem;
+  font-weight: 500;
+
+  &-menu {
+    display: flex;
+    flex-direction: column;
+
+    &__items {
+      z-index: 1;
+      width: 100%;
+      padding: $section-padding 0; 
+      
+      ul {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 calc(2.5% + $base-padding);
+      }
+    }
+  }
+
+  &-icons {
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: $base-padding calc(2.5% + $base-padding);
+    background-color: #250925;
+
+    &__logo {
+      display: flex;
+      align-items: center;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: $font-size-md;
+        font-weight: 700;
+
+        span {
+          margin-right: 0.75rem;
+        }
+
+        img {
+          width: $font-size-md;
+        }
+      }
+    }
+
+    &__social {
+      display: flex;
+
+      a {
+        margin-right: $base-margin;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        img {
+          width: $font-size-md;
+        }
+      }
+    }
+  }
+
+  &-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('~../../images/background_pattern_footer.png');
+    background-size: 200px;
+    background-position: 50% 50%;
+    opacity: 0.06;
+  }
+
+  @media screen and (max-width: 500px) {
+    &-menu {
+      &__items {       
+        padding: $section-padding-sm 0; 
+        
+        ul {
+          flex-wrap: wrap;
+          justify-content: flex-start;
+
+          li:nth-of-type(1) {
+            width: 100%;
+          }
+
+          li:nth-of-type(n+2) {
+            width: 50%;
+          }
+
+          li:nth-of-type(2), li:nth-of-type(3) {
+            margin: 5% 0;
+          }
+        }
+      }
+    }
+
+    &-icons {      
+      &__logo {
+        width: 50%;
+
+        a {
+          font-size: 1.5rem;
+
+          span {
+            margin-right: 0.5rem;
+          }
+
+          img {
+            width: 1.5rem;
+          }
+        }
+      }
+
+      &__social {
+        width: 50%;
+
+        a {
+          margin-right: 0.5rem;
+          display: flex;
+
+          img {
+            width: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 430px) {
+    &-menu {
+      &__items {       
+        ul {
+          li:nth-of-type(3), li:nth-of-type(5) {
+            width: calc(50% - $base-padding);
+            padding-left: $base-padding;
+          }
+        }
+      }
+    }
+
+    &-icons {            
+      &__social {
+        padding-left: $base-padding;
+      }
+    }
+  }
+}

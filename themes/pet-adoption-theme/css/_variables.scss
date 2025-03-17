@@ -1,0 +1,27 @@
+// themes colors
+$primary-color: #792f6c;
+$bg-color: #faf6f2;
+$white-color: #fff;
+$banner-color: #ffe8d0;
+
+// spacing
+$base-padding: 1rem;
+$padding-sm: 1.5rem;
+$base-margin: 1rem;
+$margin-sm: 1.5rem;
+$section-padding: 5.25rem;
+$section-padding-sm: calc(5.25rem / 2);
+$heading-margin: 3rem;
+
+$base-border-radius: 0.35rem;
+$border-radius-sm: 0.25rem;
+
+$base-line-height: 1.5rem;
+
+// font sizes
+$base-font-size: 1rem;
+$font-size-xl: $base-font-size * 3.5;
+$font-size-lg: $base-font-size * 2.5;
+$font-size-md: $base-font-size * 1.75;
+$font-size-sm: $base-font-size * 1.2;
+$font-size-xs: $base-font-size * 0.75;
