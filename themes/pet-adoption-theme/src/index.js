@@ -11,7 +11,7 @@ checkHomeUrl();
 
 function findUrl() {
   url = url.replace("https://", "");  
-  url = url.replace("localhost/", "");
+  url = url.replace("http://localhost/", "");
 
   // Remove the last character of the url if it is a slash
   let urlLastChar = url.slice(-1);
@@ -38,6 +38,17 @@ function checkHomeUrl() {
     urlLastSegment = urlSegments[urlSegments.length - 1];
   }
 }
+
+/* Loading spinner animation */
+window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader");
+
+  loader.classList.add("loader-hidden");
+
+  loader.addEventListener("transitionend", () => {
+    loader.remove();
+  });
+});
 
 /* Navbar Overlay */
 
