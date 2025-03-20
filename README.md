@@ -19,3 +19,7 @@ WordPress Theme built for pet adoption website, utilizing WordPress as the CMS. 
 - JavaScript
 - WordPress
 - PHP
+
+## Plugins Used
+
+- ACF
