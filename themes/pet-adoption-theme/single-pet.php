@@ -20,17 +20,17 @@
   while (have_posts()) {
     the_post(); ?>
     <div class="pet">
-      <h1>Hi, I'm <?php the_field('pet_name'); ?></h1>
+      <h1>Hi, I'm <?php echo get_field('pet_name'); ?></h1>
       <div class="pet-bg">
-        <img class="pet-img" src="<?php the_field('pet_image'); ?>">
+        <img class="pet-img" src="<?php echo get_field('pet_image'); ?>">
         <div class="pet-bg__pattern"></div>
       </div>
       <div class="pet-info">
         <div class="pet-info__content"> 
           <div class="pet-info__content-cap">
-            <p>About <?php the_field('pet_name'); ?></p>
-            <p><span>Gender:</span> <?php the_field('pet_gender'); ?></p>
-            <p><span>Age:</span> <?php the_field('pet_age'); ?></p>
+            <p>About <?php echo get_field('pet_name'); ?></p>
+            <p><span>Gender:</span> <?php echo get_field('pet_gender'); ?></p>
+            <p><span>Age:</span> <?php echo get_field('pet_age'); ?></p>
             <?php 
               if ($petBreed) echo '<p><span>Breed:</span> ' . $petBreed . '</p>'; 
               if ($petTrained) echo '<p><span>House Trained:</span> Yes</p>'; 
@@ -40,7 +40,7 @@
             ?>
           </div>   
           <div>
-            <p>Meet <?php the_field('pet_name'); ?></p>
+            <p>Meet <?php echo get_field('pet_name'); ?></p>
             <?php the_content(); ?>
           </div>
         </div>
@@ -48,11 +48,11 @@
           if ($petShelter->have_posts()) { 
             $petShelter->the_post(); ?>
             <div class="pet-info__shelter">
-              <p class="pet-info__shelter-name"><?php the_field('shelter_name'); ?></p>
+              <p class="pet-info__shelter-name"><?php echo get_field('shelter_name'); ?></p>
               <div class="pet-info__shelter-map"><?php echo get_field('shelter_map'); ?></div>
-              <p><span>Location:</span> <?php the_field('shelter_location'); ?></p>
-              <p><span>Email:</span> <?php the_field('shelter_email'); ?></p>
-              <p><span>Phone:</span> <?php the_field('shelter_phone'); ?></p>
+              <p><span>Location:</span> <?php echo get_field('shelter_location'); ?></p>
+              <p><span>Email:</span> <?php echo get_field('shelter_email'); ?></p>
+              <p><span>Phone:</span> <?php echo get_field('shelter_phone'); ?></p>
               <a href="<?php echo the_permalink(); ?>"><div>More Info</div></a>
             </div>
           <?php }
@@ -120,12 +120,12 @@
           <a href="<?php the_permalink(); ?>">
             <div class="pet-card__info" style="background-color: <?php echo $catBg; ?>">
               <img src="<?php echo get_theme_file_uri('/images/icon_' . $catIcon . '.svg'); ?>" alt="<?php echo 'icon-' . $catIcon; ?>">
-              <p>Hello, I am <br><?php the_field('pet_name'); ?></p>
-              <div style="background-color: <?php echo $catBg; ?>"><?php the_field('pet_age'); ?></div>
+              <p>Hello, I am <br><?php echo get_field('pet_name'); ?></p>
+              <div style="background-color: <?php echo $catBg; ?>"><?php echo get_field('pet_age'); ?></div>
             </div>
             <div class="pet-card__bg"></div>
             <div class="pet-card__img">
-              <img src="<?php the_field('pet_image'); ?>" alt="<?php the_field('pet_name'); ?>">
+              <img src="<?php echo get_field('pet_image'); ?>" alt="<?php echo get_field('pet_name'); ?>">
             </div>
           </a>
         </div>
@@ -153,12 +153,12 @@
           <a href="<?php the_permalink(); ?>">
             <div class="pet-card__info" style="background-color: <?php echo $dogBg; ?>">
               <img src="<?php echo get_theme_file_uri('/images/icon_' . $dogIcon . '.svg'); ?>" alt="<?php echo 'icon-' . $dogIcon; ?>">
-              <p>Hello, I am <br><?php the_field('pet_name'); ?></p>
-              <div style="background-color: <?php echo $dogBg; ?>"><?php the_field('pet_age'); ?></div>
+              <p>Hello, I am <br><?php echo get_field('pet_name'); ?></p>
+              <div style="background-color: <?php echo $dogBg; ?>"><?php echo get_field('pet_age'); ?></div>
             </div>
             <div class="pet-card__bg"></div>
             <div class="pet-card__img">
-              <img src="<?php the_field('pet_image'); ?>" alt="<?php the_field('pet_name'); ?>">
+              <img src="<?php echo get_field('pet_image'); ?>" alt="<?php echo get_field('pet_name'); ?>">
             </div>
           </a>
         </div>

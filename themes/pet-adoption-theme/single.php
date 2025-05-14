@@ -15,7 +15,7 @@ while (have_posts()) {
     <div><a href="<?php echo $post_category_link; ?>" class="post-category"><?php echo $post_category_name; ?></a></div>
     <div class="post-content">
       <div class="post-content__img">
-        <img src="<?php the_field("post_image"); ?>" alt="<?php the_title(); ?>">
+        <img src="<?php echo get_field("post_image"); ?>" alt="<?php the_title(); ?>">
         <?php if($post_photo_credit) {
           echo '<p>Photo Credit: <a href="' . $post_photo_link . '" target="_blank">' . $post_photo_credit . '</a></p>';
         } ?> 

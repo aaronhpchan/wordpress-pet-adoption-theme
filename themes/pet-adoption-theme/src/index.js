@@ -1,59 +1,39 @@
-/* Check URL */
-let url = window.location.href;
-let urlHome;
-let urlSegments;
-let urlHomeSegments;
-let ifUrlHome;
-let urlLastSegment;
-findUrl();
-findHomeUrl();
-checkHomeUrl();
+// Check URL 
 
-function findUrl() {
-  url = url.replace("https://", "");  
-  url = url.replace("http://localhost/", "");
+function isOnPage(pageIdentifier) {
+  const currentUrl = window.location.href;
 
-  // Remove the last character of the url if it is a slash
-  let urlLastChar = url.slice(-1);
-  if (urlLastChar === "/") {
-    url = url.substring(0, url.length - 1);
+  // Remove protocol (https://, http://) and optional trailing slash
+  const cleanUrl = currentUrl.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
+  const cleanIdentifier = pageIdentifier.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
+
+  return cleanUrl.includes(cleanIdentifier);
+}
+
+function isHomePage() {
+  const path = window.location.pathname;
+  return path === "/" || path === "/pet-adoption-theme/";
+}
+
+// Loading spinner animation
+
+class Loader {
+  constructor() {
+    const loader = document.querySelector(".loader");
+
+    if (loader) {
+      loader.classList.add("loader-hidden");
+  
+      loader.addEventListener("transitionend", () => {
+        loader.remove();
+      });
+    }
   }
 }
 
-function findHomeUrl() {
-  if (url.includes("/")) {
-    urlHome = url.substring(0, url.indexOf("/"));
-  } else {
-    urlHome = url;
-  }
-}
-
-function checkHomeUrl() {
-  urlSegments = url.split("/");
-  urlHomeSegments = urlHome.split("/");
-  if (urlSegments.length === urlHomeSegments.length) {
-    ifUrlHome = true;
-  } else {
-    ifUrlHome = false;
-    urlLastSegment = urlSegments[urlSegments.length - 1];
-  }
-}
-
-/* Loading spinner animation */
-window.addEventListener("load", () => {
-  const loader = document.querySelector(".loader");
-
-  loader.classList.add("loader-hidden");
-
-  loader.addEventListener("transitionend", () => {
-    loader.remove();
-  });
-});
-
-/* Navbar Overlay */
+// Navbar Overlay
 
 class NavOverlay {
-  // Create/initiate object
   constructor() {
     this.openButton = document.querySelector(".navbar-menu__icon");
     this.closeButton = document.querySelector(".nav-overlay__close");
@@ -62,14 +42,14 @@ class NavOverlay {
     this.isOverlayOpened = false;
     this.events();
   }
-  // Events
+  
   events() {
     this.openButton.addEventListener("click", this.openOverlay.bind(this));
     this.closeButton.addEventListener("click", this.closeOverlay.bind(this));
     document.addEventListener("keydown", this.keyPressDispatcher.bind(this));
     window.addEventListener("resize", this.screenResize.bind(this));
   }
-  // Methods
+  
   openOverlay() {
     this.navOverlay.classList.add("nav-overlay--active");
     this.isOverlayOpened = true;
@@ -89,12 +69,10 @@ class NavOverlay {
     }
   }
 }
-const navOverlay = new NavOverlay();
 
-/* Search */
+// Search 
 
 class Search {
-  // Create/initiate object
   constructor() {
     this.openButton = document.querySelector(".navbar-menu__search");
     this.closeButton = document.querySelector(".search-overlay__close");
@@ -104,11 +82,10 @@ class Search {
     this.isOverlayOpened = false;
     this.typingTimer;
     this.searchResultsDiv = document.querySelector(".search-overlay__results");
-    this.searchResult;
     this.prevSearchValue;
     this.events();
   }
-  // Events
+  
   events() {
     this.openButton.addEventListener("click", this.openOverlay.bind(this));
     this.closeButton.addEventListener("click", this.closeOverlay.bind(this));
@@ -116,7 +93,7 @@ class Search {
     document.addEventListener("keydown", this.keyPressDispatcher.bind(this));
     this.searchField.addEventListener("keyup", this.typingLogic.bind(this));
   }
-  // Methods
+  
   openOverlay() {
     this.searchOverlay.classList.add("search-overlay--active");
     this.searchField.value = "";
@@ -193,16 +170,17 @@ class Search {
     }
   }
 }
-const search = new Search();
 
-/* Home links animation */
+// Home links animation
 
-// Only executes on homepage
-if (ifUrlHome) {
-  let homeLinks = document.querySelectorAll(".home-links__item");
-  homeLinks.forEach(homeLinkHover);
-  function homeLinkHover(homeLink) {
-    let homeLinkImg = homeLink.querySelector(".home-links__img").querySelector("img");
+class HomeLinksAnimation {
+  constructor() {
+    this.homeLinks = document.querySelectorAll(".home-links__item");
+    this.homeLinks.forEach(this.homeLinkHover.bind(this));
+  }
+
+  homeLinkHover(homeLink) {
+    const homeLinkImg = homeLink.querySelector(".home-links__img").querySelector("img");
 
     homeLink.addEventListener("mouseover", () => {
       homeLinkImg.classList.add("home-links__img-hover");
@@ -213,69 +191,107 @@ if (ifUrlHome) {
   }
 }
 
-/* Home stories slideshow */
+// Home stories slideshow
 
-// Only executes on homepage
-if (ifUrlHome) {
-  let slideIndex = 1;
-  showSlides(slideIndex);
+class HomeStoriesSlideshow {
+  constructor(slidesSelector, prevBtnSelector, nextBtnSelector) {
+    this.slides = document.querySelectorAll(slidesSelector);
+    this.slideIndex = 1;
+    this.nextBtn = document.querySelector(nextBtnSelector);
+    this.prevBtn = document.querySelector(prevBtnSelector);
+    this.showSlides(this.slideIndex);
+    this.events();
+  }
+
+  events() {
+    this.nextBtn.addEventListener("click", () => this.plusSlides(1));
+    this.prevBtn.addEventListener("click", () => this.plusSlides(-1));
+  }
 
   // Next/previous controls
-  function plusSlides(n) {
-    showSlides(slideIndex += n);
+  plusSlides(n) {
+    this.showSlides(this.slideIndex += n);
   }
 
   // Slide image controls
-  function currentSlide(n) {
-    showSlides(slideIndex = n);
+  currentSlide(n) {
+    this.showSlides(this.slideIndex = n);
   }
 
-  function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("home-story__content");
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    slides[slideIndex-1].style.display = "block";
+  showSlides(n) {
+    if (!this.slides.length) return;
+    if (n > this.slides.length) this.slideIndex = 1;
+    if (n < 1) this.slideIndex = this.slides.length;
+
+    this.slides.forEach(slide => {
+      slide.style.display = "none";
+    });
+    this.slides[this.slideIndex - 1].style.display = "block";
   }
 }
 
-/* Pet card animation */
+// Pet card animation 
 
-let petCards = document.querySelectorAll(".pet-card");
-petCards.forEach(petCardHover);
-function petCardHover(petCard) {
-  let petCardBg = petCard.querySelector(".pet-card__bg");
-  let petCardImg = petCard.querySelector(".pet-card__img").querySelector("img");
-  let petCardIcon = petCard.querySelector(".pet-card__info").querySelector("img");
+class PetCardHoverEffect {
+  constructor() {
+    this.petCards = document.querySelectorAll(".pet-card");
+    this.petCards.forEach(this.petCardHover.bind(this));
+  }
 
-  petCard.addEventListener("mouseover", () => {
-    petCardBg.classList.add("pet-card__bg-hover");
-    petCardImg.classList.add("pet-card__img-hover");
-    petCardIcon.classList.add("pet-card__info-imghover");
-  });
-  petCard.addEventListener("mouseleave", () => {
-    petCardBg.classList.remove("pet-card__bg-hover");
-    petCardImg.classList.remove("pet-card__img-hover");
-    petCardIcon.classList.remove("pet-card__info-imghover");
-  });
+  petCardHover(petCard) {
+    const petCardBg = petCard.querySelector(".pet-card__bg");
+    const petCardImg = petCard.querySelector(".pet-card__img").querySelector("img");
+    const petCardIcon = petCard.querySelector(".pet-card__info").querySelector("img");
+
+    petCard.addEventListener("mouseover", () => {
+      petCardBg.classList.add("pet-card__bg-hover");
+      petCardImg.classList.add("pet-card__img-hover");
+      petCardIcon.classList.add("pet-card__info-imghover");
+    });
+    petCard.addEventListener("mouseleave", () => {
+      petCardBg.classList.remove("pet-card__bg-hover");
+      petCardImg.classList.remove("pet-card__img-hover");
+      petCardIcon.classList.remove("pet-card__info-imghover");
+    });
+  }
 }
   
-/* Dropdown */
+// Dropdown 
 
-// Only executes on blog page and blog catergory page
-if (url.includes("blog") || url.includes("category")) {
-  let dropdownTrigger = document.getElementsByClassName("blog-categories__label")[0];
-  let dropdown = document.getElementsByClassName("blog-categories__items")[0];
-  dropdownTrigger.addEventListener("click", showDropdown);
+class Dropdown {
+  constructor() {
+    this.dropdownTrigger = document.querySelector(".blog-categories__label");
+    this.dropdown = document.querySelector(".blog-categories__items");
+    this.events();
+  }
 
-  function showDropdown() {
-    dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+  events() {
+    this.dropdownTrigger.addEventListener("click", this.showDropdown.bind(this));
+  }
+
+  showDropdown() {
+    this.dropdown.style.display = this.dropdown.style.display === "flex" ? "none" : "flex";
   }
 }
 
+window.addEventListener("load", () => {
+  new Loader();
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  new NavOverlay();
+  new Search();
+  if (isHomePage()) {
+    new HomeLinksAnimation();
+    new HomeStoriesSlideshow(".home-story__content", ".home-stories__prev", ".home-stories__next");
+  }
+  if (isHomePage() || isOnPage("adopt-a-cat") || isOnPage("adopt-a-dog") || isOnPage("pets") || isOnPage("shelters")) {
+    new PetCardHoverEffect();
+  }
+  if (isOnPage("blog") || isOnPage("category")) {
+    new Dropdown();
+  }
+});
 
 
 

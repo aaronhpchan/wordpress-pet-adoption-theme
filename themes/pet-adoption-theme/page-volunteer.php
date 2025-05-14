@@ -13,15 +13,15 @@
   <div class="volunteer-intro">
     <div class="volunteer-intro__img">
       <div class="volunteer-intro__img-container">
-        <img src="<?php the_field("content_image"); ?>" alt="<?php the_field("content_name"); ?>">
+        <img src="<?php echo get_field("content_image"); ?>" alt="<?php echo get_field("content_name"); ?>">
       </div>
       <div class="volunteer-intro__img-bg">
         <div class="volunteer-intro__img-pattern"></div>
       </div>
     </div>
     <div class="volunteer-intro__text">
-      <h2><?php the_field("content_name"); ?></h2>
-      <p><?php the_field("main_body_content"); ?></p>
+      <h2><?php echo get_field("content_name"); ?></h2>
+      <p><?php echo get_field("main_body_content"); ?></p>
     </div>
   </div>
 
@@ -68,12 +68,12 @@
   $volunteer->the_post(); ?>
   <div class="volunteer-intro">    
     <div class="volunteer-intro__text">
-      <h2><?php the_field("content_name"); ?></h2>
-      <p><?php the_field("main_body_content"); ?></p>
+      <h2><?php echo get_field("content_name"); ?></h2>
+      <p><?php echo get_field("main_body_content"); ?></p>
     </div>
     <div class="volunteer-intro__img">
       <div class="volunteer-intro__img-container">
-        <img src="<?php the_field("content_image"); ?>" alt="<?php the_field("content_name"); ?>">
+        <img src="<?php echo get_field("content_image"); ?>" alt="<?php echo get_field("content_name"); ?>">
       </div>
       <div class="volunteer-intro__img-bg">
         <div class="volunteer-intro__img-pattern"></div>

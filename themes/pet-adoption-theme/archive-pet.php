@@ -72,12 +72,12 @@
       <a href="<?php the_permalink(); ?>">
         <div class="pet-card__info" style="background-color: <?php echo $petBg; ?>">
           <img src="<?php echo get_theme_file_uri('/images/icon_' . $petIcon . '.svg'); ?>" alt="<?php echo 'icon-' . $petIcon; ?>">
-          <p>Hello, I am <br><?php the_field('pet_name'); ?></p>
-          <div style="background-color: <?php echo $petBg; ?>"><?php the_field('pet_age'); ?></div>
+          <p>Hello, I am <br><?php echo get_field('pet_name'); ?></p>
+          <div style="background-color: <?php echo $petBg; ?>"><?php echo get_field('pet_age'); ?></div>
         </div>
         <div class="pet-card__bg"></div>
         <div class="pet-card__img">
-          <img src="<?php the_field('pet_image'); ?>" alt="<?php the_field('pet_name'); ?>">
+          <img src="<?php echo get_field('pet_image'); ?>" alt="<?php echo get_field('pet_name'); ?>">
         </div>
       </a>
     </div>

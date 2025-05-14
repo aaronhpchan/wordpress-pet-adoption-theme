@@ -17,7 +17,7 @@
           <div class="blog-post">
             <div class="blog-post__img">
               <a href="<?php the_permalink(); ?>">
-                <img src="<?php the_field('post_image'); ?>" alt="<?php the_title(); ?>">
+                <img src="<?php echo get_field('post_image'); ?>" alt="<?php the_title(); ?>">
               </a>
             </div>
             <div class="blog-post__info">

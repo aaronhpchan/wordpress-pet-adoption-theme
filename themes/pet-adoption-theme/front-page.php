@@ -7,9 +7,16 @@
   </div>
   
   <div class="home-banner__bg">
-    <div class="home-banner__bg-img"><img src="<?php echo get_theme_file_uri('/images/banner_1.jpg'); ?>" alt="Banner image 1"></div>
-    <div class="home-banner__bg-img"><img src="<?php echo get_theme_file_uri('/images/banner_2.jpg'); ?>" alt="Banner image 2"></div>
-    <div class="home-banner__bg-img"><img src="<?php echo get_theme_file_uri('/images/banner_3.jpg'); ?>" alt="Banner image 3"></div>
+    <?php 
+      for ($n = 0; $n < 3; $n++) { 
+        $bannerImgFile = '/images/banner_' . $n + 1 . '.jpg';
+        $bannerImgUrl = get_theme_file_uri($bannerImgFile);
+        ?>
+        <div class="home-banner__bg-img">
+          <img src="<?php echo $bannerImgUrl; ?>" alt="<?php echo 'Banner image ' . $n + 1 ?>">
+        </div>
+      <?php }
+    ?>
     <div class="home-banner__bg-pattern"></div>
   </div>
 </div>
@@ -41,8 +48,8 @@
       'meta_value' => 'About us'
     ));
     $homeAbout->the_post(); ?>
-    <h2><?php the_field("content_name"); ?></h2>
-    <div><?php the_field("main_body_content"); ?></div>
+    <h2><?php echo get_field("content_name"); ?></h2>
+    <div><?php echo get_field("main_body_content"); ?></div>
 </div>
 
 <div class="home-pets">
@@ -74,12 +81,12 @@
         <a href="<?php the_permalink(); ?>">
           <div class="pet-card__info" style="background-color: <?php echo $catBg; ?>">
             <img src="<?php echo get_theme_file_uri('/images/icon_' . $catIcon . '.svg'); ?>" alt="<?php echo 'icon-' . $catIcon; ?>">
-            <p>Hello, I am <br><?php the_field('pet_name'); ?></p>
-            <div style="background-color: <?php echo $catBg; ?>"><?php the_field('pet_age'); ?></div>
+            <p>Hello, I am <br><?php echo get_field('pet_name'); ?></p>
+            <div style="background-color: <?php echo $catBg; ?>"><?php echo get_field('pet_age'); ?></div>
           </div>
           <div class="pet-card__bg"></div>
           <div class="pet-card__img">
-            <img src="<?php the_field('pet_image'); ?>" alt="<?php the_field('pet_name'); ?>">
+            <img src="<?php echo get_field('pet_image'); ?>" alt="<?php echo get_field('pet_name'); ?>">
           </div>
         </a>
       </div>
@@ -114,12 +121,12 @@
         <a href="<?php the_permalink(); ?>">
           <div class="pet-card__info" style="background-color: <?php echo $dogBg; ?>">
             <img src="<?php echo get_theme_file_uri('/images/icon_' . $dogIcon . '.svg'); ?>" alt="<?php echo 'icon-' . $dogIcon; ?>">
-            <p>Hello, I am <br><?php the_field('pet_name'); ?></p>
-            <div style="background-color: <?php echo $dogBg; ?>"><?php the_field('pet_age'); ?></div>
+            <p>Hello, I am <br><?php echo get_field('pet_name'); ?></p>
+            <div style="background-color: <?php echo $dogBg; ?>"><?php echo get_field('pet_age'); ?></div>
           </div>
           <div class="pet-card__bg"></div>
           <div class="pet-card__img">
-            <img src="<?php the_field('pet_image'); ?>" alt="<?php the_field('pet_name'); ?>">
+            <img src="<?php echo get_field('pet_image'); ?>" alt="<?php echo get_field('pet_name'); ?>">
           </div>
         </a>
       </div>
@@ -140,7 +147,7 @@
       <div class="home-post">
         <div class="home-post__img">
           <a href="<?php the_permalink(); ?>">
-            <img src="<?php the_field('post_image'); ?>" alt="<?php the_title(); ?>">
+            <img src="<?php echo get_field('post_image'); ?>" alt="<?php the_title(); ?>">
           </a>
         </div>
         <div class="home-post__info">
@@ -156,7 +163,7 @@
     wp_reset_postdata();
   ?>
   </div>
-  <p class="home-posts__link"><a href="<?php echo site_url('/blog'); ?>">View All Blog Posts</a></p>
+  <p class="home-posts__link"><a href="<?php echo trailingslashit(site_url('/blog')); ?>">View All Blog Posts</a></p>
 </div>
 
 <div class="home-stories">
@@ -171,7 +178,7 @@
         $homeStories->the_post(); ?>
         <div class="home-story__content">         
           <div class="home-story__img">
-            <img src="<?php the_field('story_image'); ?>" alt="<?php the_title(); ?>">
+            <img src="<?php echo get_field('story_image'); ?>" alt="<?php the_title(); ?>">
           </div>
           <div class="home-story__text">
             <strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>
@@ -191,8 +198,8 @@
       wp_reset_postdata();
     ?>
   </div>
-  <a class="home-stories__prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="home-stories__next" onclick="plusSlides(1)">&#10095;</a>
+  <a class="home-stories__prev">&#10094;</a>
+  <a class="home-stories__next">&#10095;</a>
 </div>
 
 <?php get_footer(); ?>

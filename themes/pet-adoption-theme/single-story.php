@@ -7,7 +7,7 @@ while (have_posts()) {
     <h1><?php the_title(); ?></h1>
     <div class="post-content">
       <div class="post-content__img">
-        <img src="<?php the_field("story_image"); ?>" alt="<?php the_title(); ?>">
+        <img src="<?php echo get_field("story_image"); ?>" alt="<?php the_title(); ?>">
       </div>
       <?php the_content(); ?>
     </div>
