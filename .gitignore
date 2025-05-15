@@ -3,6 +3,7 @@ plugins
 upgrade
 uploads
 node_modules
+debug.log
 /index.php
 /themes/index.php
 /themes/twentytwentyfive
