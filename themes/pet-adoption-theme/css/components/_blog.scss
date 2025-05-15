@@ -1,18 +1,5 @@
-@mixin category-label() {
-  display: inline-block;
-  padding: 0.55rem 0.75rem;
-  margin-bottom: $base-margin;
-  font-size: $font-size-xs;
-  text-transform: uppercase;
-  letter-spacing: 0.05rem;
-  border: 2px solid #f0e3d2;
-  border-radius: 20px;
-  transition: border-color 250ms ease-in-out;
-
-  &:hover {
-    border-color: #e0c4c8;
-  }
-}
+@use '../variables' as *;
+@use '../mixins' as *;
 
 .blog-section {
   display: flex;
@@ -59,47 +46,26 @@
 
         &__img {        
           a {
-            display: inline-block; 
-            overflow: hidden; 
-            border-radius: $border-radius-sm;
+            @include post-img-container();
           }
           
           img {
-            display: block;
-            width: 100%;
+            @include post-img();
             aspect-ratio: 6 / 5;
-            object-fit: cover;
-            transition: transform 500ms ease-in-out;
-            overflow-clip-margin: content-box;
-            overflow: clip;
-
-            &:hover {
-              transform: scale(1.05);
-            }
           }
         }
 
         &__info {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-
-          div:first-child {
-            display: flex;
-            justify-content: space-between;
-            padding: $base-padding 0;
-            border-bottom: 1px dashed #f0e3d2;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.05rem;
-          }
+          @include post-info();
 
           h2 {
             text-align: left;
           }
 
           .blog-post__category > a {
-            @include category-label();
+            @include post-type-text-style();
+            @include post-category();
+            margin-bottom: $base-margin;
           }
         }
       }
@@ -141,7 +107,9 @@
           border-top: 1px dashed #f0e3d2;
           
           p > a {
-            @include category-label();
+            @include post-type-text-style();
+            @include post-category();
+            margin-bottom: $base-margin;
             animation-name: fadeCategories;
             animation-duration: 1s;
           }

@@ -10,8 +10,7 @@
     <?php 
       for ($n = 0; $n < 3; $n++) { 
         $bannerImgFile = '/images/banner_' . $n + 1 . '.jpg';
-        $bannerImgUrl = get_theme_file_uri($bannerImgFile);
-        ?>
+        $bannerImgUrl = get_theme_file_uri($bannerImgFile); ?>
         <div class="home-banner__bg-img">
           <img src="<?php echo $bannerImgUrl; ?>" alt="<?php echo 'Banner image ' . $n + 1 ?>">
         </div>
@@ -48,8 +47,8 @@
       'meta_value' => 'About us'
     ));
     $homeAbout->the_post(); ?>
-    <h2><?php echo get_field("content_name"); ?></h2>
-    <div><?php echo get_field("main_body_content"); ?></div>
+    <h2><?php echo get_field('content_name'); ?></h2>
+    <div><?php echo get_field('main_body_content'); ?></div>
 </div>
 
 <div class="home-pets">
@@ -143,23 +142,12 @@
       'posts_per_page' => 3
     ));
     while ($homePosts->have_posts()) {
-      $homePosts->the_post(); ?>
-      <div class="home-post">
-        <div class="home-post__img">
-          <a href="<?php the_permalink(); ?>">
-            <img src="<?php echo get_field('post_image'); ?>" alt="<?php the_title(); ?>">
-          </a>
-        </div>
-        <div class="home-post__info">
-          <p>Blog Post</p>
-          <p><?php the_time('M j, Y'); ?></p>
-        </div>               
-        <div class="home-post__title">
-          <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-          <div><p><?php echo get_the_category_list(', '); ?></p></div>
-        </div>
-      </div>
-    <?php }
+      $homePosts->the_post(); 
+      get_template_part('template-parts/blog-posts', null, [
+        'image_field_name' => 'post_image',
+        'post_type' => 'Blog Post'
+      ]);
+    }
     wp_reset_postdata();
   ?>
   </div>

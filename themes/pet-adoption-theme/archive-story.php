@@ -5,28 +5,16 @@
   <div class="blog-container">
     <div class="blog-posts">
       <?php 
-        while(have_posts()) {
-          the_post(); ?>
-          <div class="blog-post">
-            <div class="blog-post__img">
-              <a href="<?php the_permalink(); ?>">
-                <img src="<?php echo get_field('story_image'); ?>" alt="<?php the_title(); ?>">
-              </a>
-            </div>
-            <div class="blog-post__info">
-              <div>
-                <p>Success Story</p>
-                <p><?php the_time('M j, Y'); ?></p>
-              </div>
-              <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>          
-              <div><p class="blog-post__category"><?php echo get_the_category_list(', '); ?></p></div>
-            </div>      
-          </div>
-        <?php } ?>
+        while (have_posts()) {
+          the_post(); 
+          get_template_part('template-parts/blog-posts', null, [
+            'image_field_name' => 'story_image',
+            'post_type' => 'Success Story'
+          ]);
+        }
+      ?>
     </div>
   </div>
 </div>
 
-<?php get_footer();
-
-?>
+<?php get_footer(); ?>

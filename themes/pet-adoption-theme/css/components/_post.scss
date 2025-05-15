@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 .post {
   padding: $section-padding-sm 7.5% $section-padding;
   text-align: center;

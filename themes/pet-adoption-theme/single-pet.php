@@ -41,7 +41,7 @@
           </div>   
           <div>
             <p>Meet <?php echo get_field('pet_name'); ?></p>
-            <?php the_content(); ?>
+            <?php echo get_the_content(); ?>
           </div>
         </div>
         <?php
@@ -53,7 +53,7 @@
               <p><span>Location:</span> <?php echo get_field('shelter_location'); ?></p>
               <p><span>Email:</span> <?php echo get_field('shelter_email'); ?></p>
               <p><span>Phone:</span> <?php echo get_field('shelter_phone'); ?></p>
-              <a href="<?php echo the_permalink(); ?>"><div>More Info</div></a>
+              <a href="<?php echo get_the_permalink(); ?>"><div>More Info</div></a>
             </div>
           <?php }
         ?>

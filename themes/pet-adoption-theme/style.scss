@@ -1,29 +1,33 @@
 /* 
   Theme Name: Pet Adoption
+  Theme URI: https://petfriend.aaronwebdev.com
   Author: Aaron Chan
+  Author URI: https://aaronwebdev.com
+  Description: A WordPress theme designed for pet adoption websites
   Version: 1.0
+  Requires at least: 5.9
+  Tested up to: 6.8.1
+  Requires PHP: 8.0
+  Text domain: pet-adoption
 */
 
-// variables & functions
-@import 'css/variables';
-
 // base & layout
-@import 'css/base';
+@use 'css/base';
 
 // components (header, footer etc.)
-@import 'css/components/loader';
-@import 'css/components/header';
-@import 'css/components/footer';
-@import 'css/components/search-overlay';
-@import 'css/components/nav-overlay';
-@import 'css/components/home-banner';
-@import 'css/components/home-links';
-@import 'css/components/home-posts';
-@import 'css/components/home-stories';
-@import 'css/components/home';
-@import 'css/components/pet-cards';
-@import 'css/components/pet';
-@import 'css/components/blog';
-@import 'css/components/volunteer';
-@import 'css/components/post';
-@import 'css/components/page';
+@use 'css/components/loader';
+@use 'css/components/header';
+@use 'css/components/footer';
+@use 'css/components/search-overlay';
+@use 'css/components/nav-overlay';
+@use 'css/components/home-banner';
+@use 'css/components/home-links';
+@use 'css/components/home-posts';
+@use 'css/components/home-stories';
+@use 'css/components/home';
+@use 'css/components/pet-cards';
+@use 'css/components/pet';
+@use 'css/components/blog';
+@use 'css/components/volunteer';
+@use 'css/components/post';
+@use 'css/components/page';

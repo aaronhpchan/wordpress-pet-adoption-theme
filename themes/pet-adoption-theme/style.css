@@ -3,15 +3,13 @@
   Theme URI: https://petfriend.aaronwebdev.com
   Author: Aaron Chan
   Author URI: https://aaronwebdev.com
-  Description: A WordPress theme for pet adoption websites
+  Description: A WordPress theme designed for pet adoption websites
   Version: 1.0
   Requires at least: 5.9
-  Tested up to: 6.7.2
+  Tested up to: 6.8.1
   Requires PHP: 8.0
-  Text domain: petAdoption
+  Text domain: pet-adoption
 */
-
-/* reset styles */
 * {
   color: inherit;
   margin: 0;
@@ -627,39 +625,40 @@ a {
 .home-posts .home-post__img a img {
   display: block;
   width: 100%;
-  aspect-ratio: 1/1;
   object-fit: cover;
-  transition: transform 500ms ease-in-out;
-  overflow-clip-margin: content-box;
   overflow: clip;
+  transition: transform 500ms ease-in-out;
+  aspect-ratio: 1/1;
 }
 .home-posts .home-post__img a img:hover {
   transform: scale(1.05);
 }
 .home-posts .home-post__info {
   display: flex;
-  justify-content: space-between;
-  padding: 1rem 0;
-  border-bottom: 1px dashed #f0e3d2;
-}
-.home-posts .home-post__info p {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05rem;
-}
-.home-posts .home-post__title {
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
-.home-posts .home-post__title h3 {
+.home-posts .home-post__info div:first-child {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px dashed #f0e3d2;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05rem;
+}
+.home-posts .home-post__info div:nth-of-type(2) {
+  display: flex;
+  height: 100%;
+}
+.home-posts .home-post__info div:nth-of-type(2) h3 {
   margin: 1.25rem 0 1rem;
 }
-.home-posts .home-post__title div {
+.home-posts .home-post__info div:last-of-type {
   margin-top: 0.5rem;
 }
-.home-posts .home-post__title div p > a {
+.home-posts .home-post__info div:last-of-type p > a {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
@@ -669,7 +668,7 @@ a {
   border-radius: 20px;
   transition: border-color 250ms ease-in-out;
 }
-.home-posts .home-post__title div p > a:hover {
+.home-posts .home-post__info div:last-of-type p > a:hover {
   border-color: #e0c4c8;
 }
 .home-posts__link {
@@ -1173,11 +1172,10 @@ a {
 .blog-section .blog-container .blog-posts .blog-post__img img {
   display: block;
   width: 100%;
-  aspect-ratio: 6/5;
   object-fit: cover;
-  transition: transform 500ms ease-in-out;
-  overflow-clip-margin: content-box;
   overflow: clip;
+  transition: transform 500ms ease-in-out;
+  aspect-ratio: 6/5;
 }
 .blog-section .blog-container .blog-posts .blog-post__img img:hover {
   transform: scale(1.05);
@@ -1200,15 +1198,15 @@ a {
   text-align: left;
 }
 .blog-section .blog-container .blog-posts .blog-post__info .blog-post__category > a {
-  display: inline-block;
-  padding: 0.55rem 0.75rem;
-  margin-bottom: 1rem;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
+  display: inline-block;
+  padding: 0.55rem 0.75rem;
   border: 2px solid #f0e3d2;
   border-radius: 20px;
   transition: border-color 250ms ease-in-out;
+  margin-bottom: 1rem;
 }
 .blog-section .blog-container .blog-posts .blog-post__info .blog-post__category > a:hover {
   border-color: #e0c4c8;
@@ -1245,15 +1243,15 @@ a {
   border-top: 1px dashed #f0e3d2;
 }
 .blog-section .blog-container .blog-categories__dropdown div:nth-child(2).blog-categories__items p > a {
-  display: inline-block;
-  padding: 0.55rem 0.75rem;
-  margin-bottom: 1rem;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
+  display: inline-block;
+  padding: 0.55rem 0.75rem;
   border: 2px solid #f0e3d2;
   border-radius: 20px;
   transition: border-color 250ms ease-in-out;
+  margin-bottom: 1rem;
   animation-name: fadeCategories;
   animation-duration: 1s;
 }

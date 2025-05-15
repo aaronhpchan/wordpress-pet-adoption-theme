@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 @mixin volunteer-card() {
   position: relative;
   display: flex;

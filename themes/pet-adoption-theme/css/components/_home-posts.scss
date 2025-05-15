@@ -1,8 +1,5 @@
-@mixin post-label() {
-  font-size: $font-size-xs;
-  text-transform: uppercase;
-  letter-spacing: 0.05rem;
-}
+@use '../variables' as *;
+@use '../mixins' as *;
 
 .home-posts {
   padding: $section-padding 20% 0;
@@ -26,63 +23,37 @@
 
     &__img {            
       a {
-        display: inline-block; 
-        overflow: hidden; 
-        border-radius: 0.25rem;
+        @include post-img-container();
 
         img {
-          display: block;
-          width: 100%;
-          aspect-ratio: 1 / 1;
-          object-fit: cover;
-          transition: transform 500ms ease-in-out;
-          overflow-clip-margin: content-box;
-          overflow: clip;
-  
-          &:hover {
-            transform: scale(1.05);
-          }
+          @include post-img();
+          aspect-ratio: 1 / 1;       
         }
       }
     }
 
     &__info {
-      display: flex;
-      justify-content: space-between;
-      padding: $base-padding 0;
-      border-bottom: 1px dashed #f0e3d2;
-
-      p {
-        @include post-label();
-      }
-    }
-
-    &__title {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      @include post-info();
       height: 100%;
 
-      h3 {
-        margin: 1.25rem 0 $base-margin;
-      }
+      div:nth-of-type(2) {       
+        display: flex;
+        height: 100%;
 
-      div {
-        margin-top: 0.5rem;
-        
-        p > a {        
-          @include post-label();
-          display: inline-block;
-          padding: 0.55rem 0.75rem;
-          border: 2px solid #f0e3d2;
-          border-radius: 20px;
-          transition: border-color 250ms ease-in-out;
-
-          &:hover {
-            border-color: #e0c4c8;
-          }
+        h3 {
+          margin: 1.25rem 0 $base-margin;
         }
       }
+
+      div:last-of-type {
+        margin-top: 0.5rem;
+
+        p > a {        
+          @include post-type-text-style();
+          @include post-category();
+        }
+      }
+      
     }
   }
 
