@@ -126,41 +126,33 @@ class Search {
         // petData is from functions.php
         const response = await fetch(petData.root_url + '/wp-json/pet/v1/search?term=' + this.searchField.value);
         const searchResults = await response.json();
-        let isEmptyResult = true;
-        Object.keys(searchResults).forEach(function(key, index) {
-          if(this[key].length) {
-            isEmptyResult = false;
-          } 
-        }, searchResults);      
+        const isEmptyResult = Object.values(searchResults).every(arr => arr.length === 0);
+        let resultsHtml = '';
 
-        this.searchResultsDiv.innerHTML = `
-          ${isEmptyResult ? `<p class="search-overlay__results-heading">No matches were found for "${this.searchField.value}"</p>` : `<p class="search-overlay__results-heading">Search results for "${this.searchField.value}"<p>`}
-          ${searchResults.pages.length ? '<p class="search-overlay__results-category">Pages</p><ul>' : ''}
-            ${searchResults.pages.map(result => `
-              <li><a href="${result.permalink}">${result.title}</a></li>`).join('')
-            }  
-          ${searchResults.posts.length ? '</ul>' : ''}
-          ${searchResults.posts.length ? '<p class="search-overlay__results-category">Blog Posts</p><ul>' : ''}
-            ${searchResults.posts.map(result => `
-              <li><a href="${result.permalink}">${result.title}</a></li>`).join('')
-            }  
-          ${searchResults.posts.length ? '</ul>' : ''}
-          ${searchResults.pets.length ? '<p class="search-overlay__results-category">Pets</p><ul>' : ''}
-            ${searchResults.pets.map(result => `
-              <li><a href="${result.permalink}">${result.title}</a></li>`).join('')
-            }  
-          ${searchResults.pets.length ? '</ul>' : ''}
-          ${searchResults.shelters.length ? '<p class="search-overlay__results-category">Shelters</p><ul>' : ''}
-            ${searchResults.shelters.map(result => `
-              <li><a href="${result.permalink}">${result.title}</a></li>`).join('')
-            }  
-          ${searchResults.shelters.length ? '</ul>' : ''}
-          ${searchResults.stories.length ? '<p class="search-overlay__results-category">Stories</p><ul>' : ''}
-            ${searchResults.stories.map(result => `
-              <li><a href="${result.permalink}">${result.title}</a></li>`).join('')
-            }  
-          ${searchResults.stories.length ? '</ul>' : ''}
-        `;
+        if (isEmptyResult) {
+          resultsHtml = `<p class="search-overlay__results-heading">No matches were found for "${this.searchField.value}"</p>`;
+        } else {
+          resultsHtml = `<p class="search-overlay__results-heading">Search results for "${this.searchField.value}"<p>`;
+
+          const resultTypes = {
+            page: 'Pages',
+            post: 'Blog Posts',
+            pet: 'Pets',
+            shelter: 'Shelters',
+            story: 'Stories',
+          };
+
+          for (const type in resultTypes) {
+            if (searchResults[type] && searchResults[type].length > 0) {
+              resultsHtml += `<p class="search-overlay__results-category">${resultTypes[type]}</p><ul>`;
+              searchResults[type].forEach(result => {
+                resultsHtml += `<li><a href="${result.permalink}">${result.title}</a></li>`;
+              });
+              resultsHtml += '</ul>';
+            }
+          }
+        }
+        this.searchResultsDiv.innerHTML = resultsHtml;
       } catch(err) {
         console.log(err);
       }

@@ -1,92 +1,73 @@
 <?php 
 
-// create new custom url for custom post type
-function petRegisterSearch() {
+// Create new custom url for custom post type
+function pet_register_search() {
   register_rest_route('pet/v1', 'search', array(
     'methods' => WP_REST_SERVER::READABLE, // 'GET'
-    'callback' => 'petSearchResults',
+    'callback' => 'pet_search_results',
     'permission_callback' => '__return_true'
   ));
 }
 
-function petSearchResults($searchData) {
-  $mainQuery = new WP_Query(array(
+function pet_search_results($search_data) {
+  $main_query = new WP_Query(array(
     'post_type' => array('post', 'page', 'pet', 'shelter', 'story'),
-    's' => sanitize_text_field($searchData['term'])
+    's' => sanitize_text_field($search_data['term'])
   ));
   
-  $queryResults = array(
-    'pages' => array(),
-    'posts' => array(),
-    'pets' => array(),
-    'shelters' => array(),
-    'stories' => array()
+  $query_results = array(
+    'page' => array(),
+    'post' => array(),
+    'pet' => array(),
+    'shelter' => array(),
+    'story' => array()
   );
 
-  while($mainQuery->have_posts()) {
-    $mainQuery->the_post();
-    
-    if(get_post_type() === 'page') {
-      array_push($queryResults['pages'], array(
-        'title' => get_the_title(),
-        'permalink' => get_the_permalink(),
-      ));
+  while($main_query->have_posts()) {
+    $main_query->the_post();
+    $post_type = get_post_type();
+    $result = array(
+      'title' => get_the_title(),
+      'permalink' => get_the_permalink()
+    );
+    if ($post_type === 'shelter') {
+      $result['id'] = get_the_id();
     }
-    if(get_post_type() === 'post') {
-      array_push($queryResults['posts'], array(
-        'title' => get_the_title(),
-        'permalink' => get_the_permalink(),
-      ));
-    }
-    if(get_post_type() === 'pet') {
-      array_push($queryResults['pets'], array(
-        'title' => get_the_title(),
-        'permalink' => get_the_permalink(),
-      ));
-    }
-    if(get_post_type() === 'shelter') {
-      array_push($queryResults['shelters'], array(
-        'title' => get_the_title(),
-        'permalink' => get_the_permalink(),
-        'id' => get_the_id()
-      ));
-    }
-    if(get_post_type() === 'story') {
-      array_push($queryResults['stories'], array(
-        'title' => get_the_title(),
-        'permalink' => get_the_permalink(),
-      ));
+
+    if (isset($query_results[$post_type])) {
+      array_push($query_results[$post_type], $result);
     }
   }
 
-  if($queryResults['shelters']) {
-    $shelterRelationshipQuery = new WP_Query(array(
+  if($query_results['shelter']) {
+    $shelter_relationship_query = new WP_Query(array(
       'post_type' => 'pet',
       'meta_query' => array(
         'relation' => 'OR',
         array(
           'key' => 'pet_shelter',
           'compare' => 'LIKE',
-          'value' => '"' . $queryResults['shelters'][0]['id'] . '"'
+          'value' => '"' . $query_results['shelter'][0]['id'] . '"'
         )
       )
     ));
 
-    while($shelterRelationshipQuery->have_posts()) {
-      $shelterRelationshipQuery->the_post();
+    while($shelter_relationship_query->have_posts()) {
+      $shelter_relationship_query->the_post();
 
-      if(get_post_type() === 'pet') {
-        array_push($queryResults['pets'], array(
-          'title' => get_the_title(),
-          'permalink' => get_the_permalink(),
-        ));
-      }
+      array_push($query_results['pet'], array(
+        'title' => get_the_title(),
+        'permalink' => get_the_permalink(),
+      ));   
     }
 
-    $queryResults['pets'] = array_values(array_unique($queryResults['pets'], SORT_REGULAR));
+    $query_results['pet'] = array_values(array_unique($query_results['pet'], SORT_REGULAR));
   }
-  
-  return $queryResults;
+  wp_reset_postdata();
+
+  return $query_results;
 }
 
-add_action('rest_api_init', 'petRegisterSearch');
+add_action('rest_api_init', 'pet_register_search');
+
+?>
