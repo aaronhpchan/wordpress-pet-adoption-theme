@@ -2,19 +2,21 @@
 
 <div>
   <?php 
-    $shelterName = get_the_title();
+    $shelter_name = get_the_title();
+    $shelter_policy = get_field('shelter_policy');
+
     while(have_posts()) {
       the_post(); ?>
       <div class="pet">
-        <h1><?php echo $shelterName; ?></h1>
+        <h1><?php echo $shelter_name; ?></h1>
         <div class="pet-info">
           <div class="pet-info__content">   
             <div>
-              <p>About <?php echo $shelterName; ?></p>
+              <p>About <?php echo $shelter_name; ?></p>
               <?php echo get_field('main_body_content'); ?>
             </div>
-            <?php if(get_field('shelter_policy')) {
-              echo '<div>' . '<p>Adoption Policy</p>' . get_field('shelter_policy') . '</div>';
+            <?php if($shelter_policy) {
+              echo '<div>' . '<p>Adoption Policy</p>' . $shelter_policy . '</div>';
             } ?>
           </div>
           <div class="pet-info__shelter">
@@ -31,7 +33,7 @@
 </div>
 
 <?php
-  $shelterPets = new WP_Query(array(
+  $pets_query = new WP_Query(array(
     'posts_per_page' => 3,
     'post_type' => 'pet',
     'meta_query' => array(
@@ -42,45 +44,10 @@
       )
     )
   ));
-  if ($shelterPets->have_posts()) { ?>
-    <h2>Pets from <?php echo $shelterName; ?></h2>
-    <div class="pet-cards">
-    <?php 
-      for ($petNum = 0; $petNum < 3; $petNum++) { 
-        switch ($petNum) {
-          case 0:
-            $petBg = '#7be0c6';
-            $petIcon = 'climbing-toy';
-            break;
-          case 1:
-            $petBg = '#a2def6';
-            $petIcon = 'fish';
-            break;
-          case 2:
-            $petBg = '#ffccb0';
-            $petIcon = 'ribbon';
-            break;
-        }
-        $shelterPets->the_post(); ?>
-        <div class="pet-card">
-          <a href="<?php the_permalink(); ?>">
-            <div class="pet-card__info" style="background-color: <?php echo $petBg; ?>">
-              <img src="<?php echo get_theme_file_uri('/images/icon_' . $petIcon . '.svg'); ?>" alt="<?php echo 'icon-' . $petIcon; ?>">
-              <p>Hello, I am <br><?php echo get_field('pet_name'); ?></p>
-              <div style="background-color: <?php echo $petBg; ?>"><?php echo get_field('pet_age'); ?></div>
-            </div>
-            <div class="pet-card__bg"></div>
-            <div class="pet-card__img">
-              <img src="<?php echo get_field('pet_image'); ?>" alt="<?php echo get_field('pet_name'); ?>">
-            </div>
-          </a>
-        </div>
-      <?php }
-    ?>
-    </div>
-  <?php }
+  if ($pets_query->have_posts()) { ?>
+    <h2>Pets from <?php echo $shelter_name; ?></h2>
+    <?php include(locate_template('template-parts/pet-cards.php'));
+  }
 ?>
 
-<?php get_footer();
-
-?>
+<?php get_footer(); ?>

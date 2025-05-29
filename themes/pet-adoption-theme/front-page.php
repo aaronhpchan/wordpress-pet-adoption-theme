@@ -52,86 +52,34 @@
 </div>
 
 <div class="home-pets">
-  <div class="pet-cards">
   <?php 
-    $homeCats = new WP_Query(array(
+    $cats_query = new WP_Query(array(
       'posts_per_page' => 3,
       'post_type' => 'pet',
       'meta_key' => 'pet_species',
       'meta_value' => 'cat'
     ));
-    for ($catNum = 0; $catNum < 3; $catNum++) { 
-      switch ($catNum) {
-        case 0:
-          $catBg = '#7be0c6';
-          $catIcon = 'climbing-toy';
-          break;
-        case 1:
-          $catBg = '#a2def6';
-          $catIcon = 'fish';
-          break;
-        case 2:
-          $catBg = '#ffccb0';
-          $catIcon = 'ribbon';
-          break;
-      }
-      $homeCats->the_post(); ?>
-      <div class="pet-card">
-        <a href="<?php the_permalink(); ?>">
-          <div class="pet-card__info" style="background-color: <?php echo $catBg; ?>">
-            <img src="<?php echo get_theme_file_uri('/images/icon_' . $catIcon . '.svg'); ?>" alt="<?php echo 'icon-' . $catIcon; ?>">
-            <p>Hello, I am <br><?php echo get_field('pet_name'); ?></p>
-            <div style="background-color: <?php echo $catBg; ?>"><?php echo get_field('pet_age'); ?></div>
-          </div>
-          <div class="pet-card__bg"></div>
-          <div class="pet-card__img">
-            <img src="<?php echo get_field('pet_image'); ?>" alt="<?php echo get_field('pet_name'); ?>">
-          </div>
-        </a>
-      </div>
-    <?php } 
-  ?>
-  </div>
-  <div class="pet-cards">
-  <?php 
-    $homeDogs = new WP_Query(array(
+    $cats_posts = $cats_query->posts;
+    wp_reset_postdata();
+    
+    $dogs_query = new WP_Query(array(
       'posts_per_page' => 3,
       'post_type' => 'pet',
       'meta_key' => 'pet_species',
       'meta_value' => 'dog'
     ));
-    for ($dogNum = 0; $dogNum < 3; $dogNum++) { 
-      switch ($dogNum) {
-        case 0:
-          $dogBg = '#ffd986';
-          $dogIcon = 'bone';
-          break;
-        case 1:
-          $dogBg = '#e0c4c8';
-          $dogIcon = 'tree';
-          break;
-        case 2:
-          $dogBg = '#ecc3ee';
-          $dogIcon = 'trophy';
-          break;
-      }
-      $homeDogs->the_post(); ?>
-      <div class="pet-card">
-        <a href="<?php the_permalink(); ?>">
-          <div class="pet-card__info" style="background-color: <?php echo $dogBg; ?>">
-            <img src="<?php echo get_theme_file_uri('/images/icon_' . $dogIcon . '.svg'); ?>" alt="<?php echo 'icon-' . $dogIcon; ?>">
-            <p>Hello, I am <br><?php echo get_field('pet_name'); ?></p>
-            <div style="background-color: <?php echo $dogBg; ?>"><?php echo get_field('pet_age'); ?></div>
-          </div>
-          <div class="pet-card__bg"></div>
-          <div class="pet-card__img">
-            <img src="<?php echo get_field('pet_image'); ?>" alt="<?php echo get_field('pet_name'); ?>">
-          </div>
-        </a>
-      </div>
-    <?php }
-  ?> 
-  </div>
+    $dogs_posts = $dogs_query->posts;
+    wp_reset_postdata();
+
+    $home_pets = array_merge($cats_posts, $dogs_posts);
+    $pets_query = new WP_Query(); 
+    $pets_query->posts = $home_pets; 
+    $pets_query->post_count = count($home_pets); 
+    $pets_query->found_posts = count($home_pets); 
+    $pets_query->max_num_pages = 1;
+    
+    include(locate_template('template-parts/pet-cards.php'));
+  ?>
 </div>
 
 <div class="home-posts">
