@@ -5,6 +5,8 @@ get_header();
 $pet_id = get_the_ID();
 $pet_species = get_field('pet_species');
 $pet_name = get_field('pet_name');
+$pet_gender = get_field('pet_gender');
+$pet_age = get_field('pet_age');
 $pet_breed = get_field('pet_breed');
 $pet_trained = get_field('pet_trained');
 $pet_health = get_field('pet_health');
@@ -36,15 +38,36 @@ while (have_posts()) {
       <div class="pet-info__content"> 
         <div class="pet-info__content-cap">
           <p>About <?php echo $pet_name; ?></p>
-          <p><span>Gender:</span> <?php echo get_field('pet_gender'); ?></p>
-          <p><span>Age:</span> <?php echo get_field('pet_age'); ?></p>
-          <?php 
-            if ($pet_breed) echo '<p><span>Breed:</span> ' . $pet_breed . '</p>'; 
-            if ($pet_trained) echo '<p><span>House Trained:</span> Yes</p>'; 
-            if ($pet_health) echo '<p><span>Health Info:</span> ' . implode(", ", $pet_health) . '</p>'; 
-            if ($pet_good_with) echo '<p><span>Good With:</span> ' . implode(", ", $pet_good_with) . '</p>'; 
-            if ($pet_fee) echo '<p><span>Adoption Fee:</span> $' . number_format((float)$pet_fee, 2) . '</p>';
-          ?>
+          <dl>
+            <?php if ($pet_gender) { ?>
+              <dt>Gender:</dt>
+              <dd><?php echo $pet_gender; ?></dd>
+            <?php } ?>
+            <?php if ($pet_age) { ?>
+              <dt>Age:</dt>
+              <dd><?php echo $pet_age; ?></dd>
+            <?php } ?>
+            <?php if ($pet_breed) { ?>
+              <dt>Breed:</dt>
+              <dd><?php echo $pet_breed; ?></dd>
+            <?php } ?>
+            <?php if ($pet_trained) { ?>
+              <dt>House Trained:</dt>
+              <dd>Yes</dd>
+            <?php } ?>
+            <?php if ($pet_health) { ?>
+              <dt>Health Info:</dt>
+              <dd><?php echo implode(", ", $pet_health); ?></dd>
+            <?php } ?>
+            <?php if ($pet_good_with) { ?>
+              <dt>Good With:</dt>
+              <dd><?php echo implode(", ", $pet_good_with); ?></dd>
+            <?php } ?>
+            <?php if ($pet_fee) { ?>
+              <dt>Adoption Fee:</dt>
+              <dd><?php echo number_format((float)$pet_fee, 2); ?></dd>
+            <?php } ?>
+          </dl>
         </div>   
         <div>
           <p>Meet <?php echo $pet_name; ?></p>
@@ -53,16 +76,9 @@ while (have_posts()) {
       </div>
       <?php
         if ($pet_shelter->have_posts()) { 
-          $pet_shelter->the_post(); ?>
-          <div class="pet-info__shelter">
-            <p class="pet-info__shelter-name"><?php echo get_field('shelter_name'); ?></p>
-            <div class="pet-info__shelter-map"><?php echo get_field('shelter_map'); ?></div>
-            <p><span>Location:</span> <?php echo get_field('shelter_location'); ?></p>
-            <p><span>Email:</span> <?php echo get_field('shelter_email'); ?></p>
-            <p><span>Phone:</span> <?php echo get_field('shelter_phone'); ?></p>
-            <a href="<?php echo get_the_permalink(); ?>"><div>More Info</div></a>
-          </div>
-        <?php }
+          $pet_shelter->the_post(); 
+          get_template_part('template-parts/shelter-card');
+        }
       ?>
     </div>
   </div>

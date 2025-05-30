@@ -988,36 +988,47 @@ a {
   background-color: #fff;
   margin-bottom: auto;
 }
-.pet-info__content div:nth-of-type(1) {
-  padding-bottom: 1rem;
-}
 .pet-info__content div p {
   margin-bottom: 1rem;
 }
-.pet-info__content div p:nth-of-type(1):not(div.pet-info__shelter-map p) {
+.pet-info__content div p:nth-of-type(1) {
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.125rem;
   text-transform: uppercase;
   padding-bottom: 1rem;
+  margin-bottom: 1rem;
   border-bottom: 1px dashed #f0e3d2;
   color: #ff8d7b;
 }
 .pet-info__content div p:last-child {
   margin-bottom: 0;
 }
-.pet-info__content div p > span {
+.pet-info__content-cap {
+  text-transform: capitalize;
+}
+.pet-info__content-cap p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pet-info__content-cap dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  align-items: baseline;
+}
+.pet-info__content-cap dl dt {
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.125rem;
   text-transform: uppercase;
-  margin-right: 1rem;
+  white-space: nowrap;
 }
-.pet-info__content div:last-child > p:last-child {
-  line-height: 1.5rem;
-}
-.pet-info__content-cap {
-  text-transform: capitalize;
+.pet-info__content-cap dl dd {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .pet-info__details {
   padding: 1.5rem;
@@ -1025,64 +1036,22 @@ a {
   background-color: #fff;
   margin-bottom: auto;
 }
-.pet-info__details:nth-of-type(1) {
-  padding-bottom: 1rem;
-}
-.pet-info__details p {
-  margin-bottom: 1rem;
-}
-.pet-info__details p:nth-of-type(1):not(div.pet-info__shelter-map p) {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.125rem;
-  text-transform: uppercase;
-  padding-bottom: 1rem;
-  border-bottom: 1px dashed #f0e3d2;
-  color: #ff8d7b;
-}
-.pet-info__details p:last-child {
-  margin-bottom: 0;
-}
-.pet-info__details p > span {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.125rem;
-  text-transform: uppercase;
-  margin-right: 1rem;
-}
 .pet-info__shelter {
   padding: 1.5rem;
   border-radius: 0.35rem;
   background-color: #fff;
   margin-bottom: auto;
 }
-.pet-info__shelter:nth-of-type(1) {
-  padding-bottom: 1rem;
-}
-.pet-info__shelter p {
-  margin-bottom: 1rem;
-}
-.pet-info__shelter p:nth-of-type(1):not(div.pet-info__shelter-map p) {
+.pet-info__shelter-name {
+  text-align: center;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.125rem;
   text-transform: uppercase;
   padding-bottom: 1rem;
+  margin-bottom: 1rem;
   border-bottom: 1px dashed #f0e3d2;
   color: #ff8d7b;
-}
-.pet-info__shelter p:last-child {
-  margin-bottom: 0;
-}
-.pet-info__shelter p > span {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.125rem;
-  text-transform: uppercase;
-  margin-right: 1rem;
-}
-.pet-info__shelter p:first-child {
-  text-align: center;
 }
 .pet-info__shelter-map p {
   padding-bottom: 1rem;
@@ -1092,7 +1061,25 @@ a {
   aspect-ratio: 4/3;
   border-radius: 0.25rem;
 }
-.pet-info__shelter a {
+.pet-info__shelter-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  align-items: baseline;
+}
+.pet-info__shelter-list dt {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.125rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pet-info__shelter-list dd {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.pet-info__shelter-btn {
   display: flex;
   justify-content: center;
   padding: 1rem;
@@ -1101,26 +1088,36 @@ a {
   border-radius: 0.25rem;
   transition: background-color 250ms ease-in-out;
 }
-.pet-info__shelter a div {
+.pet-info__shelter-btn div {
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.125rem;
   text-transform: uppercase;
 }
-.pet-info__shelter a:hover {
+.pet-info__shelter-btn:hover {
   background-color: #ff8d7b;
 }
-@media screen and (max-width: 768px) {
-  .pet h1 {
-    font-size: 2.5rem;
-    line-height: 2.75rem;
-  }
+@media screen and (max-width: 992px) {
   .pet-info {
     display: flex;
     flex-direction: column;
   }
   .pet-info__shelter {
     margin-top: 1.5rem;
+  }
+  .pet-info__shelter-map p iframe {
+    max-height: 399px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .pet h1 {
+    font-size: 2.5rem;
+    line-height: 2.75rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  .pet-info {
+    padding: 2.625rem 1.5rem 0;
   }
 }
 

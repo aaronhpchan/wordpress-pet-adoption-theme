@@ -51,3 +51,43 @@
     transform: scale(1.05);
   }
 }
+
+@mixin pet-label() {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.125rem;
+  text-transform: uppercase;
+}
+
+@mixin pet-details() {
+  padding: $padding-sm;
+  border-radius: $base-border-radius;
+  background-color: $white-color;
+  margin-bottom: auto;
+}
+
+@mixin pet-details-heading {
+  @include pet-label();
+  padding-bottom: $base-padding;
+  margin-bottom: $base-margin;
+  border-bottom: 1px dashed #f0e3d2;
+  color: #ff8d7b;
+}
+
+@mixin shelter-details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: $base-margin; 
+  grid-row-gap: $base-margin;
+  align-items: baseline;
+
+  dt {
+    @include pet-label();
+    white-space: nowrap;
+  }
+
+  dd {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+}
