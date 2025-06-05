@@ -133,9 +133,9 @@
       <?php }
       wp_reset_postdata();
     ?>
+    <a class="home-stories__prev">&#10094;</a>
+    <a class="home-stories__next">&#10095;</a>
   </div>
-  <a class="home-stories__prev">&#10094;</a>
-  <a class="home-stories__next">&#10095;</a>
 </div>
 
 <?php get_footer(); ?>

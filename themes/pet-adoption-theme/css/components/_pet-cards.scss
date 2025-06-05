@@ -125,21 +125,44 @@
       }
     }
   }
+}
 
-  @media screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {
+  .pet-cards {
+    .pet-card {
+      min-height: 340px;
+      max-height: 340px;
+    }
+  }
+  
+  .pet-cards-column {
     display: inline-flex;
     flex-direction: column;
     width: 50%;
 
     .pet-card {
       width: 100%;
-      min-height: 340px;
-      max-height: 340px;
     }
   }
 
-  @media screen and (max-width: 768px) {
+  .pet-cards-row {
+    flex-wrap: wrap;
+
+    .pet-card {
+      width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .pet-cards {
     flex-direction: column;
     width: 100%;
+  }
+
+  .pet-cards-row {
+    .pet-card {
+      width: 100%;
+    }
   }
 }

@@ -7,6 +7,7 @@
     <?php wp_head(); ?>
   </head>
   <body <?php body_class(); ?>>
+    <div class="loader"></div>
     <nav class="navbar">
       <div class="navbar-logo">
         <a href="<?php echo home_url(); ?>">

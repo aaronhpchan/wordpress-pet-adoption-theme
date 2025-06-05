@@ -81,6 +81,10 @@
   }
 
   @media screen and (max-width: 768px) {
+    &__container {
+      max-width: min(462px, 80vw);
+    }
+    
     &__results {
       margin: $margin-sm $margin-sm $margin-sm $base-margin;
     }

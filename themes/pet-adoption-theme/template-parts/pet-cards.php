@@ -2,6 +2,8 @@
 
 if (!isset($pets_query) || !($pets_query instanceof WP_Query) || !$pets_query->have_posts()) return;
 
+$is_single_page = is_singular('shelter') || is_singular('pet');
+
 $colors_and_icons_default = [
   ['#7be0c6', 'climbing-toy'],
   ['#a2def6', 'fish'],
@@ -16,7 +18,6 @@ $colors_and_icons_default = [
   ['#9ffebe', 'tree'],
   ['#c9f2fd', 'trophy'],
 ];
-
 $colors_and_icons = $colors_and_icons ?? $colors_and_icons_default;
 $cards_per_row = $cards_per_row ?? 3;
 $total = $pets_query->post_count;
@@ -25,7 +26,10 @@ for ($i = 0; $i < $total; $i++) {
   $pets_query->the_post();
   [$bg_color, $icon] = $colors_and_icons[$i % count($colors_and_icons)];
 
-  if ($i % $cards_per_row === 0) echo "<div class='pet-cards'>"; 
+  if ($i % $cards_per_row === 0) {
+    if ($is_single_page) echo '<div class="pet-cards pet-cards-row">'; 
+    else echo '<div class="pet-cards pet-cards-column">';
+  }
   ?>
   <div class="pet-card">
     <a href="<?php the_permalink(); ?>">

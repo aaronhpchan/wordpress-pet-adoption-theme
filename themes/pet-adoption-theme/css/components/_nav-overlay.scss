@@ -54,7 +54,7 @@
     cursor: pointer;
   }
 
-  &__items {
+  &__items {    
     .menu {
       padding: 0;
       height: calc(100vh - 1.5rem - $padding-sm);

@@ -118,5 +118,12 @@
       }
     }
   }
+
+  @media screen and (min-width: 1800px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 76px);
+  }
 }
 
